@@ -135,7 +135,7 @@ function subirPorTipo(tipo, id, nombreArchivo, res) {
             // Si existe, elimina la imagen anterior         
 
             if (fs.existsSync(pathViejo)) {
-                fs.unlink(pathViejo);
+                fs.unlinkSync(pathViejo);
             }
             medico.img = nombreArchivo;
             medico.save((err, medicoActualizado) => {
@@ -167,9 +167,8 @@ function subirPorTipo(tipo, id, nombreArchivo, res) {
 
             var pathViejo = './uploads/hospitales/' + hospital.img;
             // Si existe, elimina la imagen anterior         
-
             if (fs.existsSync(pathViejo)) {
-                fs.unlink(pathViejo);
+                fs.unlinkSync(pathViejo);
             }
             hospital.img = nombreArchivo;
             hospital.save((err, hospitalActualizado) => {
