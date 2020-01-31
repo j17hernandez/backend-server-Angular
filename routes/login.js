@@ -91,7 +91,8 @@ app.post('/google', async(req, res) => {
                     ok: true,
                     usuario: usuarioDB,
                     token: token,
-                    id: usuarioDB._id
+                    id: usuarioDB._id,
+                    menu: obtenerMenu(usuarioDB.role)
                 });
             }
 
@@ -114,7 +115,8 @@ app.post('/google', async(req, res) => {
                     ok: true,
                     usuario: usuarioDB,
                     token: token,
-                    id: usuarioDB.id
+                    id: usuarioDB.id,
+                    menu: obtenerMenu(usuarioDB.role)
                 });
 
             });
@@ -156,7 +158,7 @@ app.post('/', (req, res) => {
         if (!usuarioDB) {
             return res.status(400).json({
                 ok: false,
-                mensaje: 'Credenciales incorrectas - email',
+                mensaje: 'Credenciales incorrectas', // - email
                 errors: err
             });
         }
@@ -164,7 +166,7 @@ app.post('/', (req, res) => {
         if (!bcrypt.compareSync(body.password, usuarioDB.password)) {
             return res.status(400).json({
                 ok: false,
-                mensaje: 'Credenciales incorrectas - password',
+                mensaje: 'Credenciales incorrectas', // Password
                 errors: err
             });
         }
@@ -179,7 +181,7 @@ app.post('/', (req, res) => {
             usuario: usuarioDB,
             token: token,
             id: usuarioDB._id,
-            //     menu: obtenerMenu(usuarioDB.role)
+            menu: obtenerMenu(usuarioDB.role)
         });
 
     })
@@ -188,27 +190,28 @@ app.post('/', (req, res) => {
 });
 
 
-/*
+
 function obtenerMenu(ROLE) {
 
     var menu = [{
             titulo: 'Principal',
             icono: 'mdi mdi-gauge',
             submenu: [
-                { titulo: 'Dashboard', url: '/dashboard' },
-                { titulo: 'ProgressBar', url: '/progress' },
-                { titulo: 'Gráficas', url: '/graficas1' },
-                { titulo: 'Promesas', url: '/promesas' },
-                { titulo: 'RxJs', url: '/rxjs' }
+                { titulo: 'Dashboard', url: '/dashboard', icon: 'mdi mdi-view-dashboard' },
+                { titulo: 'ProgressBar', url: '/progress', icon: 'mdi mdi-bike' },
+                { titulo: 'Graficas', url: '/graficas1', icon: 'mdi mdi-chart-bar' },
+                { titulo: 'promesas', url: '/promesas', icon: 'mdi mdi-book-open-page-variant' },
+                { titulo: 'Rxjs', url: '/rxjs', icon: 'fa fa-address-book' },
             ]
         },
         {
             titulo: 'Mantenimientos',
             icono: 'mdi mdi-folder-lock-open',
             submenu: [
-                // { titulo: 'Usuarios', url: '/usuarios' },
-                { titulo: 'Hospitales', url: '/hospitales' },
-                { titulo: 'Médicos', url: '/medicos' }
+                //   {titulo: 'Usuarios', url: '/usuarios', icon: 'fa fa-users'},
+                { titulo: 'Hospitales', url: '/hospitales', icon: 'fa  fa-hospital-o' },
+                { titulo: 'Medicos', url: '/medicos', icon: 'fa fa-user-md' },
+
             ]
         }
     ];
@@ -223,7 +226,7 @@ function obtenerMenu(ROLE) {
     return menu;
 
 }
-*/
+
 
 
 module.exports = app;

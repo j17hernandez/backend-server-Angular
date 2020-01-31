@@ -29,7 +29,7 @@ exports.verificaToken = function(req, res, next) {
 
 }
 
-/*
+
 
 
 // ==========================================
@@ -81,4 +81,3 @@ exports.verificaADMIN_o_MismoUsuario = function(req, res, next) {
 
 
 }
-*/
